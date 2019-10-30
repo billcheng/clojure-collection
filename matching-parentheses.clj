@@ -1,7 +1,3 @@
-(defn isEmpty? [parentheses]
-    (= (count parentheses) 0)
-)
-
 (defn isOpenParen? [chr]
     (= chr \()
 )
@@ -9,8 +5,8 @@
 (defn balance
     ([parentheses] (balance parentheses []))
     ([parentheses stack]
-        (if (isEmpty? parentheses)
-            (true? (isEmpty? stack))
+        (if (empty? parentheses)
+            (true? (empty? stack))
             (do
                 (def current (first parentheses))
                 (def restOfThem (next parentheses))
