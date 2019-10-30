@@ -2,24 +2,23 @@
     (= chr \()
 )
 
-(defn balance
-    ([parentheses] (balance parentheses []))
-    ([parentheses stack]
-        (if (empty? parentheses)
-            (true? (empty? stack))
-            (do
-                (def current (first parentheses))
-                (def restOfThem (next parentheses))
-                (if (isOpenParen? current)
-                    (balance restOfThem (conj stack current))
-                    (if (isOpenParen? (peek stack))
-                        (balance restOfThem (pop stack))
-                        false
-                    )
+(defn balance [input]
+  (loop [parentheses input stack []]
+    (if (empty? parentheses)
+        (true? (empty? stack))
+        (do
+            (def current (first parentheses))
+            (def restOfThem (next parentheses))
+            (if (isOpenParen? current)
+                (recur restOfThem (conj stack current))
+                (if (isOpenParen? (peek stack))
+                    (recur restOfThem (pop stack))
+                    false
                 )
             )
         )
     )
+  )
 )
 
 (assert (balance "(())") "(())")
